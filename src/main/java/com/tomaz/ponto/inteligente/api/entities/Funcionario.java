@@ -4,32 +4,91 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.tomaz.ponto.inteligente.api.enums.PerfilEnum;
 
 @Entity
+@Table(name="funcionario")
 public class Funcionario implements Serializable{
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@Column(name = "nome")
 	private String nome;
+	
+	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "senha")
 	private String senha;
+	
+	@Column(name = "cpf")
 	private String cpf;
+	
+	@Column(name = "valor_hora")
 	private BigDecimal valorHora;
-	private float qtdHorasTrabalhadas;
+	
+	@Column(name = "qtd_horas_trabalho_dia")
+	private float qtdHorasTrabalhoDia;
+	
+	@Column(name = "qtd_horas_almoco")
 	private float qtdHorasAlmoco;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "perfil")
 	private PerfilEnum perfil;
+	
+	@Column(name = "data_criacao")
 	private Date dataCriacao;
+	
+	@Column(name = "data_atualizacao")
 	private Date dataAtualizacao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Empresa empresa;
+	
+	@OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Lancamento> lancamento;
 	
+	@PreUpdate
+	public void preUpdate() {
+		dataAtualizacao = new Date();
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		final Date atual = new Date();
+		dataCriacao = atual;
+		dataAtualizacao = atual;
+	}
+	
+	public Funcionario() {
+	}
+
 	@Override
 	public String toString() {
 		return "Funcionario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
-				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhadas=" + qtdHorasTrabalhadas + ", qtdHorasAlmoco="
+				+ ", valorHora=" + valorHora + ", qtdHorasTrabalhadas=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco="
 				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
 				+ dataAtualizacao + ", empresa=" + empresa + ", lancamento=" + lancamento + "]";
 	}
@@ -64,20 +123,25 @@ public class Funcionario implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public BigDecimal getValorHora() {
-		return valorHora;
+	
+	@Transient
+	public Optional<BigDecimal> getValorHora() {
+		return Optional.ofNullable(valorHora);
 	}
 	public void setValorHora(BigDecimal valorHora) {
 		this.valorHora = valorHora;
 	}
-	public float getQtdHorasTrabalhadas() {
-		return qtdHorasTrabalhadas;
+	
+	@Transient
+	public Optional<Float> getQtdHorasTrabalhadas() {
+		return Optional.ofNullable(qtdHorasTrabalhoDia);
 	}
 	public void setQtdHorasTrabalhadas(float qtdHorasTrabalhadas) {
-		this.qtdHorasTrabalhadas = qtdHorasTrabalhadas;
+		this.qtdHorasTrabalhoDia = qtdHorasTrabalhadas;
 	}
-	public float getQtdHorasAlmoco() {
-		return qtdHorasAlmoco;
+	@Transient
+	public Optional<Float> getQtdHorasAlmoco() {
+		return Optional.ofNullable(qtdHorasAlmoco);
 	}
 	public void setQtdHorasAlmoco(float qtdHorasAlmoco) {
 		this.qtdHorasAlmoco = qtdHorasAlmoco;
