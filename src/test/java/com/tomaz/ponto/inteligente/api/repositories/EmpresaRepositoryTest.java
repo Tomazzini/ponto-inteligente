@@ -15,7 +15,7 @@ import com.tomaz.ponto.inteligente.api.entities.Empresa;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("tests")
+@ActiveProfiles("test")
 public class EmpresaRepositoryTest {
 
 	@Autowired
