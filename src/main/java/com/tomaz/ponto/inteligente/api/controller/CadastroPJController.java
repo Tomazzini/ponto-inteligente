@@ -34,7 +34,7 @@ public class CadastroPJController {
 	@Autowired
 	private EmpresaService empresaService;
 	
-	private CadastroPJDto cadastroPJDto;
+	//private CadastroPJDto cadastroPJDto;
 	
 	public CadastroPJController() {
 	}
