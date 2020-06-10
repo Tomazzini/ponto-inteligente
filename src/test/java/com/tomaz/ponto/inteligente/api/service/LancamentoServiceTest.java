@@ -24,7 +24,6 @@ import com.tomaz.ponto.inteligente.api.repositories.LancamentoRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-
 public class LancamentoServiceTest {
 
 	@MockBean
