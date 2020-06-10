@@ -21,26 +21,25 @@ public class EmpresaRepositoryTest {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 	
-	private static final String CNPJ = "12345678912345";
-	
+	private static final String CNPJ = "51463645000100";
+
 	@Before
-	public void setUp(String cnpj) {
-		var empresa = new Empresa();
-		empresa.setRazaoSocia("empresa de teste");
+	public void setUp() throws Exception {
+		Empresa empresa = new Empresa();
+		empresa.setRazaoSocia("Empresa de exemplo");
 		empresa.setCnpj(CNPJ);
 		this.empresaRepository.save(empresa);
 	}
 	
 	@After
-	public final void tearDown() {
-		empresaRepository.deleteAll();
+    public final void tearDown() { 
+		this.empresaRepository.deleteAll();
 	}
-	
+
 	@Test
 	public void testBuscarPorCnpj() {
-		var empresa = this.empresaRepository.findByCnpj(CNPJ);
+		Empresa empresa = this.empresaRepository.findByCnpj(CNPJ);
 		
 		assertEquals(CNPJ, empresa.getCnpj());
-		
 	}
 }
