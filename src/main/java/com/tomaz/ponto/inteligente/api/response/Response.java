@@ -1,6 +1,10 @@
 package com.tomaz.ponto.inteligente.api.response;
 
 import java.util.List;
+import java.util.Optional;
+
+import com.tomaz.ponto.inteligente.api.dto.LancamentoDto;
+
 import java.util.ArrayList;
 
 public class Response<T> {
@@ -28,6 +32,9 @@ public class Response<T> {
 
 	public void setErrors(List<String> errors) {
 		this.errors = errors;
+	}
+
+	public void setData(Optional<LancamentoDto> lancamentoDto) {		
 	}
 	
 }

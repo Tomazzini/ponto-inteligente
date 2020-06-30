@@ -1,4 +1,4 @@
-package com.tomaz.ponto.inteligente.api;
+package com.tomaz.ponto.inteligente.api.controller;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -74,40 +74,5 @@ public class EmpresaControllerTest {
 		
 		return empresa;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

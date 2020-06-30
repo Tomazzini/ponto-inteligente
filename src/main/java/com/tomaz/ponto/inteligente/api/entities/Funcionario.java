@@ -176,6 +176,12 @@ public class Funcionario implements Serializable{
 	public void setLancamento(List<Lancamento> lancamento) {
 		this.lancamento = lancamento;
 	}
+
+	public void setQtdHorasAlmoco(Object object) {		
+	}
+
+	public void setQtdHorasTrabalhadas(Object object) {		
+	}
 	
 
 }
